@@ -2,25 +2,36 @@ Config:
     rules*=Rule | comments*=Comment;
     
 Rule:
-    SecActionRule | SecRuleRule | SecMarkerRule;
+    SecAction | SecRule | SecMarker | SecComponentSignature | SecRuleRemoveById;
     
-SecActionRule:
-    'SecAction' actions=ActionList;
+SecAction:
+    'SecAction' '"' actions=ActionList '"';
     
-SecMarkerRule:
+SecMarker:
     'SecMarker' '"' SkipTag '"';
+
+SecComponentSignature:
+    'SecComponentSignature' '"' signature=TagValue '"';
+
+SecRuleRemoveById:
+    'SecRuleRemoveById' ids=IDRangeList;
     
-SecRuleRule:
-    'SecRule' variable=Variable '"' negated='!'? '@'? operator=Operator '"' '"' actions=ActionList '"'
+SecRule:
+    'SecRule' variables=VariableList '"' negated='!'? '@'? operator=Operator '"' '"' actions=ActionList '"'
 ;
-    
-    // What to do with collections?
+
+IDRangeList:
+    idlist+=ID | range=IDRange;
+
+VariableList:
+    variable+=Variable['|'];
+
 Variable:
-    'ARGS' | 'ARGS_COMBINED_SIZE' | 'ARGS_GET' | 'ARGS_GET_NAMES' | 'ARGS_NAMES' | 'ARGS_POST' | 'ARGS_POST_NAMES' | 'AUTH_TYPE' | 'DURATION' | 'ENV' | 'FILES' | 'FILES_COMBINED_SIZE' | 'FILES_NAMES' | 'FULL_REQUEST' | 'FULL_REQUEST_LENGTH' | 'FILES_SIZES' | 'FILES_TMPNAMES' | 'FILES_TMP_CONTENT' | 'GEO' | 'HIGHEST_SEVERITY' | 'INBOUND_DATA_ERROR' | 'MATCHED_VAR' | 'MATCHED_VARS' | 'MATCHED_VAR_NAME' | 'MATCHED_VARS_NAMES' | 'MODSEC_BUILD' | 'MULTIPART_CRLF_LF_LINES' | 'MULTIPART_FILENAME' | 'MULTIPART_NAME' | 'MULTIPART_STRICT_ERROR' | 'MULTIPART_UNMATCHED_BOUNDARY' | 'OUTBOUND_DATA_ERROR' | 'PATH_INFO' | 'PERF_ALL' | 'PERF_COMBINED' | 'PERF_GC' | 'PERF_LOGGING' | 'PERF_PHASE1' | 'PERF_PHASE2' | 'PERF_PHASE3' | 'PERF_PHASE4' | 'PERF_PHASE5' | 'PERF_RULES' | 'PERF_SREAD' | 'PERF_SWRITE' | 'QUERY_STRING' | 'REMOTE_ADDR' | 'REMOTE_HOST' | 'REMOTE_PORT' | 'REMOTE_USER' | 'REQBODY_ERROR' | 'REQBODY_ERROR_MSG' | 'REQBODY_PROCESSOR' | 'REQUEST_BASENAME' | 'REQUEST_BODY' | 'REQUEST_BODY_LENGTH' | 'REQUEST_COOKIES' | 'REQUEST_COOKIES_NAMES' | 'REQUEST_FILENAME' | 'REQUEST_HEADERS' | 'REQUEST_HEADERS_NAMES' | 'REQUEST_LINE' | 'REQUEST_METHOD' | 'REQUEST_PROTOCOL' | 'REQUEST_URI' | 'REQUEST_URI_RAW' | 'RESPONSE_BODY' | 'RESPONSE_CONTENT_LENGTH' | 'RESPONSE_CONTENT_TYPE' | 'RESPONSE_HEADERS' | 'RESPONSE_HEADERS_NAMES' | 'RESPONSE_PROTOCOL' | 'RESPONSE_STATUS' | 'RULE' | 'SCRIPT_BASENAME' | 'SCRIPT_FILENAME' | 'SCRIPT_GID' | 'SCRIPT_GROUPNAME' | 'SCRIPT_MODE' | 'SCRIPT_UID' | 'SCRIPT_USERNAME' | 'SDBM_DELETE_ERROR' | 'SERVER_ADDR' | 'SERVER_NAME' | 'SERVER_PORT' | 'SESSION' | 'SESSIONID' | 'STATUS_LINE' | 'STREAM_INPUT_BODY' | 'STREAM_OUTPUT_BODY' | 'TIME' | 'TIME_DAY' | 'TIME_EPOCH' | 'TIME_HOUR' | 'TIME_MIN' | 'TIME_MON' | 'TIME_SEC' | 'TIME_WDAY' | 'TIME_YEAR' | 'TX:' collection=VariableName | 'UNIQUE_ID' | 'URLENCODED_ERROR' | 'USERID' | 'USERAGENT_IP' | 'WEBAPPID' | 'WEBSERVER_ERROR_LOG' | 'XML'
+    'ARGS' | 'ARGS_COMBINED_SIZE' | 'ARGS_GET' | 'ARGS_GET_NAMES' | 'ARGS_NAMES' | 'ARGS_POST' | 'ARGS_POST_NAMES' | 'AUTH_TYPE' | 'DURATION' | 'ENV' | 'FILES' | 'FILES_COMBINED_SIZE' | 'FILES_NAMES' | 'FULL_REQUEST' | 'FULL_REQUEST_LENGTH' | 'FILES_SIZES' | 'FILES_TMPNAMES' | 'FILES_TMP_CONTENT' | 'GEO' | 'HIGHEST_SEVERITY' | 'INBOUND_DATA_ERROR' | 'MATCHED_VAR' | 'MATCHED_VARS' | 'MATCHED_VAR_NAME' | 'MATCHED_VARS_NAMES' | 'MODSEC_BUILD' | 'MULTIPART_CRLF_LF_LINES' | 'MULTIPART_FILENAME' | 'MULTIPART_NAME' | 'MULTIPART_STRICT_ERROR' | 'MULTIPART_UNMATCHED_BOUNDARY' | 'OUTBOUND_DATA_ERROR' | 'PATH_INFO' | 'PERF_ALL' | 'PERF_COMBINED' | 'PERF_GC' | 'PERF_LOGGING' | 'PERF_PHASE1' | 'PERF_PHASE2' | 'PERF_PHASE3' | 'PERF_PHASE4' | 'PERF_PHASE5' | 'PERF_RULES' | 'PERF_SREAD' | 'PERF_SWRITE' | 'QUERY_STRING' | 'REMOTE_ADDR' | 'REMOTE_HOST' | 'REMOTE_PORT' | 'REMOTE_USER' | 'REQBODY_ERROR' | 'REQBODY_ERROR_MSG' | 'REQBODY_PROCESSOR' | 'REQUEST_BASENAME' | 'REQUEST_BODY' | 'REQUEST_BODY_LENGTH' | 'REQUEST_COOKIES' | 'REQUEST_COOKIES_NAMES' | 'REQUEST_FILENAME' | 'REQUEST_HEADERS' | 'REQUEST_HEADERS_NAMES' | 'REQUEST_LINE' | 'REQUEST_METHOD' | 'REQUEST_PROTOCOL' | 'REQUEST_URI' | 'REQUEST_URI_RAW' | 'RESPONSE_BODY' | 'RESPONSE_CONTENT_LENGTH' | 'RESPONSE_CONTENT_TYPE' | 'RESPONSE_HEADERS' | 'RESPONSE_HEADERS_NAMES' | 'RESPONSE_PROTOCOL' | 'RESPONSE_STATUS' | 'RULE' | 'SCRIPT_BASENAME' | 'SCRIPT_FILENAME' | 'SCRIPT_GID' | 'SCRIPT_GROUPNAME' | 'SCRIPT_MODE' | 'SCRIPT_UID' | 'SCRIPT_USERNAME' | 'SDBM_DELETE_ERROR' | 'SERVER_ADDR' | 'SERVER_NAME' | 'SERVER_PORT' | 'SESSION' | 'SESSIONID' | 'STATUS_LINE' | 'STREAM_INPUT_BODY' | 'STREAM_OUTPUT_BODY' | 'TIME' | 'TIME_DAY' | 'TIME_EPOCH' | 'TIME_HOUR' | 'TIME_MIN' | 'TIME_MON' | 'TIME_SEC' | 'TIME_WDAY' | 'TIME_YEAR' | '&'? 'TX:' collection=VariableName | 'UNIQUE_ID' | 'URLENCODED_ERROR' | 'USERID' | 'USERAGENT_IP' | 'WEBAPPID' | 'WEBSERVER_ERROR_LOG' | 'XML'
 ;
     
 Operator:
-    'beginsWith' beginswith=STRING | 'contains' contains=STRING | 'containsWord' containsWord=STRING | 'detectSQLi' detectsqli=BOOL | 'detectXSS' detectxss=BOOL | 'endsWith' endswith=STRING | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=STRING | 'ge' ge=INT | 'geoLookup' geolookup=STRING | 'gsbLookup' gsblookup=INT | 'gt' gt=INT | 'inspectFile' inspectfile=STRING | 'ipMatch' ipmatch=STRING |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=INT | 'noMatch' nomatch=STRING | 'pm' pm=STRING | 'pmf' pmf=STRING | 'pmFromFile' pmfromfile=STRING | 'rbl' rbl=STRING | 'rsub' rsub=STRING | 'rx' rx=STRING | 'streq' streq=STRING | 'strmatch' strnmatch=STRING | 'unconditionalMatch' unconditionalmatch=STRING | 'validateByteRange' validatebyterange=INT | 'validateDTD' validatedtd=STRING | 'validateHash' validatehash=STRING | 'validateSchema' validateschema=STRING | 'validateUrlEncoding' validateurlencoding=STRING | 'validateUtf8Encoding' validateutf8encoding=STRING | 'verifyCC' verifycc=STRING | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=STRING | 'within' within=MacroVar
+    'beginsWith' beginswith=URIValue | 'contains' contains=STRING | 'containsWord' containsWord=STRING | 'detectSQLi' detectsqli=BOOL | 'detectXSS' detectxss=BOOL | 'endsWith' endswith=URIValue | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=INT | 'ge' ge=INT | 'geoLookup' geolookup=STRING | 'gsbLookup' gsblookup=INT | 'gt' gt=INT | 'inspectFile' inspectfile=STRING | 'ipMatch' ipmatch=STRING |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=INT | 'noMatch' nomatch=STRING | 'pm' pm=STRING | 'pmf' pmf=STRING | 'pmFromFile' pmfromfile=STRING | 'rbl' rbl=STRING | 'rsub' rsub=STRING | 'rx' rx=RegExp | 'streq' streq=STRING | 'strmatch' strnmatch=STRING | 'unconditionalMatch' unconditionalmatch=STRING | 'validateByteRange' validatebyterange=INT | 'validateDTD' validatedtd=STRING | 'validateHash' validatehash=STRING | 'validateSchema' validateschema=STRING | 'validateUrlEncoding' validateurlencoding=STRING | 'validateUtf8Encoding' validateutf8encoding=STRING | 'verifyCC' verifycc=STRING | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=STRING | 'within' within=MacroVar
 ;
 
     /* Actions are separated by ',\' or ',' only */
@@ -29,14 +40,14 @@ ActionList:
 ;
     
 Action:
-    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' expirevar=ID | 'id:' id=INT | 'initcol:' initcol=ID | "logdata:" logdata=SQDelimitedSTRING | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=SQDelimitedSTRING | 'multiMatch' multimatch=BOOL | 'noauditlog' noauditlog=BOOL | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' prepend=STRING | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:'" rev=INT "'" | 'sanitiseArg:' sanitizearg=STRING | 'sanitiseMatched:' sanitizematched=STRING | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? varname=VariableName '=' MacroValue "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=RuleTag "'" | "ver:'" ver=RuleTag "'" | 'xmlns:' xmlns=STRING
+    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' expirevar=ID | 'id:' id=INT | 'initcol:' initcol=ID | "logdata:" logdata=SQDelimitedSTRING | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=SQDelimitedSTRING | 'multiMatch' multimatch=BOOL | 'noauditlog' noauditlog=BOOL | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' prepend=STRING | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:'" rev=INT "'" | 'sanitiseArg:' sanitizearg=STRING | 'sanitiseMatched:' sanitizematched=STRING | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? varname=VariableName '=' MacroValue "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=TagValue "'" | "ver:'" ver=TagValue "'" | 'xmlns:' xmlns=STRING
 ;
 
 DisruptiveAction:
     'block' | 'accept' | 'deny' | 'drop' | 'pass' | 'pause';
     
 TransientAction:
-    'auditEngine' | 'auditLogParts' | 'debugLogLevel' | 'forceRequestBodyVariable' | 'requestBodyAccess' | 'requestBodyLimit' | 'requestBodyProcessor' | 'responseBodyAccess' | 'responseBodyLimit' | 'ruleEngine' | 'ruleRemoveById' | 'ruleRemoveByMsg' | 'ruleRemoveByTag' | 'ruleRemoveTargetById' | 'ruleRemoveTargetByMsg' | 'ruleRemoveTargetByTag' | 'hashEngine' | 'hashEnforcement'
+    'auditEngine=' auditEngine=AuditEngineValue | 'auditLogParts=' auditLogParts=AuditLogPartsValue | 'debugLogLevel=' debugLog=INT | 'forceRequestBodyVariable=' forceRequestBodyVariable=OnOffValue | 'requestBodyAccess=' requestBodyAccess=OnOffValue | 'requestBodyLimit=' requestBodyLimit=INT | 'requestBodyProcessor=' requestBodyProcessor=RequestBodyProcessorValue | 'responseBodyAccess=' responseBodyAccess=OnOffValue | 'responseBodyLimit=' responseBodyLimit=INT | 'ruleEngine=' ruleEngine=RuleEngineValue | 'ruleRemoveById=' ruleRemoveById=INT | 'ruleRemoveByMsg=' ruleRemoveByMsg=MessageValue | 'ruleRemoveByTag=' ruleRemoveByTag=TagValue | 'ruleRemoveTargetById=' ruleRemoveTargetById=INT ';' removeVariable=Variable ':'? removeVariableName=VariableName? | 'ruleRemoveTargetByMsg=' message=MessageValue ';' removeVariable=Variable ':'? removeVariableName=VariableName? | 'ruleRemoveTargetByTag=' tagName=TagValue ';' removeVariable=Variable ':'? removeVariableName=VariableName? | 'hashEngine=' | 'hashEnforcement='
 ;
 
 Transformation:
@@ -50,22 +61,55 @@ SkipTag:
     /[A-Z0-9-]+/;
 
 VariableName:
-    'tx.' MacroVar '-'? RuleTag? '-'? MacroVar? | /[A-Za-z0-9_\.\/]+/;
+    'tx.' MacroVar '-'? TagValue? '-'? MacroVar? | /[A-Za-z0-9_\.\/\[\]]+/;
     
 // For tags in rules: OWASP_CRS/POLICY/METHOD_NOT_ALLOWED
-RuleTag:
+TagValue:
     /[A-Za-z0-9-_\.\/]+/;
 
 SQDelimitedSTRING:
-    "'" macro=MacroVar "'" | "'" msg=Message "'";
+    "'" macro=MacroVar "'" | "'" msg=MessageValue "'";
 
     // This is for macros, e.g: %{tx.critical_anomaly_score} 
 MacroVar:
     '%{'? /[a-zA-Z0-9-_.]+/ '}'?;
+    
+PathNameValue:
+    /\/[a-z0-9-_\.\/]+/;
+    
 MacroValue:
     MacroVar | INT | OperationMacro;
+
 OperationMacro:
     ('+' | '-') var=MacroVar;
 
-Message:
+MessageValue:
     /[A-Za-z ]+/;
+
+// regexp can be anything now...    
+RegExp:
+    /.+/;
+    
+//    /(.\$\.\*\$\^\?\\\{\}\[\]\|\(\))+/;
+    
+IDRange:
+    /"[0-9]+-[0-9]+"/;
+    
+URIValue:
+    /\/[a-zA-Z0-9-_\.\/]+/;
+
+/* Enumerated values */
+OnOffValue:
+    'On' | 'Off';
+
+AuditEngineValue:
+    OnOffValue | 'RelevantOnly';
+
+RuleEngineValue:
+    OnOffValue | 'DetectionOnly';
+// This can be used multiple times, e.g.: +AC?
+AuditLogPartsValue:
+    /('+'|'-') [A-Z]/;
+
+RequestBodyProcessorValue:
+    'text/xml' | 'text/json';
