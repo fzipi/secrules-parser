@@ -8,7 +8,7 @@ from textx.exceptions import TextXSyntaxError
 
 modsec_mm = metamodel_from_file('modsec.tx')
 
-for rules in glob.glob('test/*.conf'):
+for rules in glob.glob('owasp-modsecurity-crs/rules/*.conf'):
     print 'Processing file %s:' % rules
     try:
         modsec_model = modsec_mm.model_from_file(rules)
