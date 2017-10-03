@@ -12,7 +12,7 @@ def print_rule(rule):
             if action.id:
                 print "Rule id = {}".format(action.id)
             if action.chain:
-                print "Rule id = {} is a chained rule.".format(action.id)
+                print "> Rule is a chained rule.".format(action.id)
 
 modsec_mm = metamodel_from_file('modsec.tx')
 

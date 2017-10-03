@@ -7,6 +7,7 @@ To use it:
     ```
     git submodule init
     git submodule update
+    cd owasp-modsecurity-crs; git checkout v3.1/dev; cd ..
     ```
 1. Install dependencies
     ```
