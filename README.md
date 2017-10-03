@@ -19,7 +19,7 @@ To use it:
     ```
     pip install --user -r requirements.txt
     ```
-1. Call `modsec.py` and it will scan the `*.conf` files in 'owasp-modsecurity-crs/rules'
+1. Execute `./modsec.py` and it will scan the `*.conf` files in 'owasp-modsecurity-crs/rules'
 
     For visualizing the syntax tree, use:
     ```
