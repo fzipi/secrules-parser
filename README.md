@@ -21,3 +21,5 @@ To use it:
     dot -Tpng -O modsec.tx.dot
     ```
     Then watch the generated PNG `modsec.tx.dot.png`!
+
+Execution stops because some of the rules aren't fully cleaned and/or there are differences in files.
