@@ -10,8 +10,14 @@ To use it:
     cd owasp-modsecurity-crs; git checkout v3.1/dev; cd ..
     ```
 1. Install dependencies
+    Dependencies can be installed system-wide, or just for your user (using `--user`).
+    System-wide:
     ```
-    pip install -r requirements.txt
+    sudo pip install -r requirements.txt
+    ```
+    User:
+    ```
+    pip install --user -r requirements.txt
     ```
 1. Call `modsec.py` and it will scan the `*.conf` files in 'owasp-modsecurity-crs/rules'
 
