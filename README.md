@@ -1,8 +1,8 @@
 # OWASP CRS Rules parser
 
-Incomplete parser for mod_security rules. 
+Incomplete parser model and sample application for parsing [mod_security CRS rules](https://github.com/SpiderLabs/owasp-modsecurity-crs/). It uses the python library [textX](http://www.igordejanovic.net/textX/) for parsing.
 
-To use it:
+How to use it:
 1. Init submodules (get the CRS ruleset):
     ```
     git submodule init
