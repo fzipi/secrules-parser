@@ -40,18 +40,26 @@ def debug_rule(rule):
     serialized = jsonpickle.encode(rule)
     print yaml.dump(yaml.load(serialized), indent=2)
 
+def get_rule_id(rule):
+    """ Gets rule ID. Only for SecAction or SecRule """
+    if rule.__class__.__name__ == "SecRule" or rule.__class__.__name__ == "SecAction":
+        for action in rule.actions:
+            if action.id:
+                return action.id
+    return 0
+
 def print_rule(rule):
     """ This is just for printing something until we see the real capabilities of this parser """
     if rule.__class__.__name__ == "SecRule":
-        for variable in rule.variables.variable:
+        for variable in rule.variables:
             if variable.collection == "TX" and variable.collectionArg == "PARANOIA_LEVEL":
-                print "One-liner Paranoia level Rule: {}".format(rule.id)
+                print "[One-liner Paranoia level Rule, id {}]".format(get_rule_id(rule))
 
-        for action in rule.actions.action:
+        for action in rule.actions:
             if action.id:
-                print "Rule id = {}".format(action.id)
+                print "* Rule id = {}".format(action.id)
             if action.chain:
-                print "> Rule is a chained rule.".format(action.id)
+                print "* > This is a chained rule from the above.".format(action.id)
 
 # Load Meta-Model
 modsec_mm = metamodel_from_file('modsec.tx', memoization=True)

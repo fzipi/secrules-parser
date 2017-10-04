@@ -14,7 +14,7 @@ Rule:
     SecAction | SecRule | SecMarker | SecComponentSignature | SecRuleRemoveById | SecRuleRemoveByTag;
     
 SecAction:
-    'SecAction' '"' actions=ActionList '"';
+    'SecAction' '"' actions+=Action[','] '"';
     
 SecMarker:
     'SecMarker' '"'? skipTag=SkipTag '"'?;
@@ -30,13 +30,10 @@ SecRuleRemoveByTag:
 
 // ActionList can be empty if is the last rule in chain    
 SecRule:
-    'SecRule' variables=VariableList '"' negated='!'? '@'? operator=Operator '"' '"'? actions=ActionList? '"'?;
+    'SecRule' variables+=Variable['|']'"' negated='!'? '@'? operator=Operator '"' '"'? actions+=Action[',']? '"'?;
     
 IDRangeList:
     idlist+=ID | range=IDRange;
-
-VariableList:
-    variable+=Variable['|'];
 
 /*
 There is no chech against collections existance, or typying between variables and value (e.g: TIME_DAY and its referred value must be equal to some integer)
@@ -65,7 +62,7 @@ Operator:
     ('beginsWith' beginswith=PathOrMacro | 'contains' contains=PathOrMacro | 'containsWord' containsWord=STRING | detectsqli ?= 'detectSQLi' | detectxss ?= 'detectXSS' | 'endsWith' endswith=PathOrMacro | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=INT | 'ge' ge=Macro | geolookup ?= 'geoLookup'  | 'gsbLookup' gsblookup=INT | 'gt' gt=Macro | 'inspectFile' inspectfile=URI | 'ipMatch' ipmatch+=IPCIDR[','] |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=INT | nomatch ?= 'noMatch' | 'pmf' pmf=PathNameValue | 'pmFromFile' pmfromfile=PathNameValue | 'pm' pm=PatternMatch | 'rbl' rbl=Hostname | 'rsub' rsub=AnythingWithASlash | 'rx' rx=RegExp | 'streq' streq=StringWithSpaces | 'strmatch' strnmatch=STRING | unconditionalmatch ?= 'unconditionalMatch' | 'validateByteRange' validatebyterange=ByteRangeList | 'validateDTD' validatedtd=PathNameValue | 'validateHash' validatehash=RegExp | 'validateSchema' validateschema=PathNameValue | validateurlencoding ?= 'validateUrlEncoding' | validateutf8encoding ?= 'validateUtf8Encoding' | 'verifyCC' verifycc=RegExp | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=RegExp | 'within' within=MacroVar);
 
 /* Actions are separated by ',\' or ',' only */
-ActionList: action+=Action[','];
+//ActionList: actionlist+=;
 /*
 Right now there is no semantics defined for:
 - chaining
