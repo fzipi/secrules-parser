@@ -81,7 +81,7 @@ TransientAction:
     'auditEngine=' auditEngine=AuditEngineValue | 'auditLogParts=' auditLogParts=AuditLogPartsValue | 'debugLogLevel=' debugLog=INT | 'forceRequestBodyVariable=' forceRequestBodyVariable=OnOffValue | 'requestBodyAccess=' requestBodyAccess=OnOffValue | 'requestBodyLimit=' requestBodyLimit=INT | 'requestBodyProcessor=' requestBodyProcessor=RequestBodyProcessorValue | 'responseBodyAccess=' responseBodyAccess=OnOffValue | 'responseBodyLimit=' responseBodyLimit=INT | 'ruleEngine=' ruleEngine=RuleEngineValue | 'ruleRemoveById=' ruleRemoveById=INT | 'ruleRemoveByMsg=' ruleRemoveByMsg=MessageValue | 'ruleRemoveByTag=' ruleRemoveByTag=Tag | 'ruleRemoveTargetById=' ruleRemoveTargetById=INT ';' removeVariable=VariableOrCollection ':'? removeVariableName=VariableName? | 'ruleRemoveTargetByMsg=' message=MessageValue ';' removeVariable=VariableOrCollection ':'? removeVariableName=VariableName? | 'ruleRemoveTargetByTag=' tagName=Tag ';' removeVariable=VariableOrCollection ':'? removeVariableName=VariableName? | 'hashEngine=' | 'hashEnforcement=';
 
 Transformation:
-    'base64Decode'|'sqlHexDecode'|'base64DecodeExt'|'base64Encode'|'cmdLine'|'compressWhitespace'|'cssDecode'|'escapeSeqDecode'|'hexDecode'|'hexEncode'|'htmlEntityDecode'|'jsDecode'|'length'|'lowercase'|'md5'|'none'|'normalisePath'|'normalizePath'|'normalisePathWin'|'normalizePathWin'|'parityEven7bit'|'parityOdd7bit'|'parityZero7bit'|'removeNulls'|'removeWhitespace'|'replaceComments'|'removeCommentsChar'|'removeComments'|'replaceNulls'|'urlDecodeUni'|'urlDecode'|'uppercase'|'urlEncode'|'utf8toUnicode'|'sha1'|'trimLeft'|'trimRight'|'trim';
+    'base64Decode'|'sqlHexDecode'|'base64DecodeExt'|'base64Encode'|'cmdLine'|'compressWhiteSpace'|'cssDecode'|'escapeSeqDecode'|'hexDecode'|'hexEncode'|'htmlEntityDecode'|'jsDecode'|'length'|'lowercase'|'md5'|'none'|'normalisePathWin'|'normalizePathWin'|'normalisePath'|'normalizePath'|'parityEven7bit'|'parityOdd7bit'|'parityZero7bit'|'removeNulls'|'removeWhitespace'|'replaceComments'|'removeCommentsChar'|'removeComments'|'replaceNulls'|'urlDecodeUni'|'urlDecode'|'uppercase'|'urlEncode'|'utf8toUnicode'|'sha1'|'trimLeft'|'trimRight'|'trim';
 
         
 /* This is to take rule continuations (\\n) as comments */    
@@ -94,7 +94,7 @@ SkipTag: /[A-Z0-9-]+/;
 VariableName: 'tx.' MacroVar '-'? Tag? '-'? MacroVar? | /[A-Za-z0-9_\-\.\/\[\]]+/;
 
 //Aho-Corasick
-PatternMatch: /[^\"\ ]+/;
+PatternMatch: /((\\")|[^"])*/;
     
 // For tags in rules: OWASP_CRS/POLICY/METHOD_NOT_ALLOWED
 Tag: /[A-Za-z0-9\/\-_\.\/]+/;
@@ -124,15 +124,16 @@ MacroVar: '%{'? /[a-zA-Z0-9-\_\.]+/ '}'?;
 /* Messages are textual sentences, e.g.: "This is bad"
 Most of the special characters appear on modsecurity_crs configuracion on rule 901001
 */    
-MessageValue: "'" /[A-Z0-9a-z\!\-,\.\%\:\_\(\)\{\}\/ ]+/ "'";
+//MessageValue: "'" /[A-Z0-9a-z\!\-,\.\%\:\_\\\(\)\{\}\/ ]+/ "'";
+MessageValue: "'" /((\\')|[^\'])*/ "'";
 
 /* There are two kinds of regexp
 For variables, use SlashedRegExp (these don't have ")
 For operations, use RegExp as these have "
 */
-RegExp: /[^\"]+/;
+RegExp: /((\\")|[^"])*/;
     
-SlashedRegExp: /[^\/]+/;
+SlashedRegExp: /([^\/])+/;
 /*
 A rules ID Range: 920000-920010
 */    
