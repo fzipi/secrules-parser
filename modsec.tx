@@ -40,26 +40,27 @@ There is no chech against collections existance, or typying between variables an
 FILES is a collection, so it doesn't belong here
 */
 Variable:
-    '!'? ('ARGS_COMBINED_SIZE' | 'ARGS_GET_NAMES' | 'ARGS_NAMES' | 'ARGS_POST_NAMES' | 'AUTH_TYPE' | 'DURATION' | 'FILES_COMBINED_SIZE' | 'FILES_NAMES' | 'FILES' | 'FULL_REQUEST' | 'FULL_REQUEST_LENGTH' | 'FILES_SIZES' | 'FILES_TMPNAMES' | 'FILES_TMP_CONTENT' | 'HIGHEST_SEVERITY' | 'INBOUND_DATA_ERROR' | 'MATCHED_VAR_NAME' | 'MODSEC_BUILD' | 'MULTIPART_CRLF_LF_LINES' | 'MULTIPART_FILENAME' | 'MULTIPART_NAME' | 'MULTIPART_STRICT_ERROR' | 'MULTIPART_UNMATCHED_BOUNDARY' | 'OUTBOUND_DATA_ERROR' | 'PATH_INFO' | 'PERF_ALL' | 'PERF_COMBINED' | 'PERF_GC' | 'PERF_LOGGING' | 'PERF_PHASE1' | 'PERF_PHASE2' | 'PERF_PHASE3' | 'PERF_PHASE4' | 'PERF_PHASE5' | 'PERF_SREAD' | 'PERF_SWRITE' | 'QUERY_STRING' | 'REMOTE_ADDR' | 'REMOTE_HOST' | 'REMOTE_PORT' | 'REMOTE_USER' | 'REQBODY_ERROR' | 'REQBODY_ERROR_MSG' | 'REQBODY_PROCESSOR' | 'REQUEST_BASENAME' | 'REQUEST_BODY' | 'REQUEST_BODY_LENGTH' | 'REQUEST_FILENAME' | 'REQUEST_LINE' | 'REQUEST_METHOD' | 'REQUEST_PROTOCOL' | 'REQUEST_URI_RAW' |'REQUEST_URI' | 'RESPONSE_BODY' | 'RESPONSE_CONTENT_LENGTH' | 'RESPONSE_CONTENT_TYPE' | 'RESPONSE_HEADERS' | 'RESPONSE_PROTOCOL' | 'RESPONSE_STATUS' | 'RULE' | 'SCRIPT_BASENAME' | 'SCRIPT_FILENAME' | 'SCRIPT_GID' | 'SCRIPT_GROUPNAME' | 'SCRIPT_MODE' | 'SCRIPT_UID' | 'SCRIPT_USERNAME' | 'SDBM_DELETE_ERROR' | 'SERVER_ADDR' | 'SERVER_NAME' | 'SERVER_PORT' | 'SESSION' | 'SESSIONID' | 'STATUS_LINE' | 'STREAM_INPUT_BODY' | 'STREAM_OUTPUT_BODY' | 'TIME' | 'TIME_DAY' | 'TIME_EPOCH' | 'TIME_HOUR' | 'TIME_MIN' | 'TIME_MON' | 'TIME_SEC' | 'TIME_WDAY' | 'TIME_YEAR' | 'UNIQUE_ID' | 'URLENCODED_ERROR' | 'USERID' | 'USERAGENT_IP' | 'WEBAPPID' | 'WEBSERVER_ERROR_LOG' | CollectionCount | count=Count? collection=CollectionName ':'? collectionArg=CollectionArgument?) | 'MATCHED_VAR';
+    '!'? ('ARGS_COMBINED_SIZE' | 'ARGS_GET_NAMES' | 'ARGS_NAMES' | 'ARGS_POST_NAMES' | 'AUTH_TYPE' | 'DURATION' | 'FILES_COMBINED_SIZE' | 'FILES_NAMES' | 'FILES' | 'FULL_REQUEST' | 'FULL_REQUEST_LENGTH' | 'FILES_SIZES' | 'FILES_TMPNAMES' | 'FILES_TMP_CONTENT' | 'HIGHEST_SEVERITY' | 'INBOUND_DATA_ERROR' | 'MATCHED_VAR_NAME' | 'MODSEC_BUILD' | 'MULTIPART_CRLF_LF_LINES' | 'MULTIPART_FILENAME' | 'MULTIPART_NAME' | 'MULTIPART_STRICT_ERROR' | 'MULTIPART_UNMATCHED_BOUNDARY' | 'OUTBOUND_DATA_ERROR' | 'PATH_INFO' | 'PERF_ALL' | 'PERF_COMBINED' | 'PERF_GC' | 'PERF_LOGGING' | 'PERF_PHASE1' | 'PERF_PHASE2' | 'PERF_PHASE3' | 'PERF_PHASE4' | 'PERF_PHASE5' | 'PERF_SREAD' | 'PERF_SWRITE' | 'QUERY_STRING' | 'REMOTE_ADDR' | 'REMOTE_HOST' | 'REMOTE_PORT' | 'REMOTE_USER' | 'REQBODY_ERROR' | 'REQBODY_ERROR_MSG' | 'REQBODY_PROCESSOR' | 'REQUEST_BASENAME' | 'REQUEST_BODY' | 'REQUEST_BODY_LENGTH' | 'REQUEST_FILENAME' | 'REQUEST_LINE' | 'REQUEST_METHOD' | 'REQUEST_PROTOCOL' | 'REQUEST_URI_RAW' |'REQUEST_URI' | 'RESPONSE_BODY' | 'RESPONSE_CONTENT_LENGTH' | 'RESPONSE_CONTENT_TYPE' | 'RESPONSE_HEADERS' | 'RESPONSE_PROTOCOL' | 'RESPONSE_STATUS' | 'RULE' | 'SCRIPT_BASENAME' | 'SCRIPT_FILENAME' | 'SCRIPT_GID' | 'SCRIPT_GROUPNAME' | 'SCRIPT_MODE' | 'SCRIPT_UID' | 'SCRIPT_USERNAME' | 'SDBM_DELETE_ERROR' | 'SERVER_ADDR' | 'SERVER_NAME' | 'SERVER_PORT' | 'SESSION' | 'SESSIONID' | 'STATUS_LINE' | 'STREAM_INPUT_BODY' | 'STREAM_OUTPUT_BODY' | 'TIME' | 'TIME_DAY' | 'TIME_EPOCH' | 'TIME_HOUR' | 'TIME_MIN' | 'TIME_MON' | 'TIME_SEC' | 'TIME_WDAY' | 'TIME_YEAR' | 'UNIQUE_ID' | 'URLENCODED_ERROR' | 'USERID' | 'USERAGENT_IP' | 'WEBAPPID' | 'WEBSERVER_ERROR_LOG' | count=Count? collection=CollectionName ':'? collectionArg=CollectionArgument?) | 'MATCHED_VAR';
 
 CollectionCount: '&' collection=CollectionName ':' VariableName;
     
 VariableOrCollection: Variable | CollectionName;
     
-CollectionArgument: AnythingWithASlash | "'"? '/' SlashedRegExp '/' "'"? | VariableName;
+CollectionArgument: AnythingBetweenSlashes | "'"? '/' SlashedRegExp '/' "'"? | VariableName;
     
 /* Collections */
 CollectionName:
     ('ARGS_GET' | 'ARGS_POST' | 'ARGS' | 'ENV' | 'GEO' | 'GLOBAL' | 'IP' | 'MATCHED_VARS_NAMES' | 'MATCHED_VARS' | 'PERF_RULES' | 'REQUEST_COOKIES_NAMES' | 'REQUEST_COOKIES' | 'REQUEST_HEADERS_NAMES' | 'REQUEST_HEADERS' | 'RESPONSE_HEADERS_NAMES' | 'RULE' | 'SESSION' | 'TX' | 'XML')
     ;
 
-AnythingWithASlash: /\/\*/;
+AnythingBetweenSlashes: /\/\*/;
+//AnythingBetweenSlashes: /(\'.+')*/;
     
 Count: '&';
 
 //- pattern match (pm/pmf)    
 Operator:
-    ('beginsWith' beginswith=PathOrMacro | 'contains' contains=PathOrMacro | 'containsWord' containsWord=STRING | detectsqli ?= 'detectSQLi' | detectxss ?= 'detectXSS' | 'endsWith' endswith=PathOrMacro | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=INT | 'ge' ge=Macro | geolookup ?= 'geoLookup'  | 'gsbLookup' gsblookup=INT | 'gt' gt=Macro | 'inspectFile' inspectfile=URI | 'ipMatch' ipmatch+=IPCIDR[','] |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=INT | nomatch ?= 'noMatch' | 'pmf' pmf=PathNameValue | 'pmFromFile' pmfromfile=PathNameValue | 'pm' pm=PatternMatch | 'rbl' rbl=Hostname | 'rsub' rsub=AnythingWithASlash | 'rx' rx=RegExp | 'streq' streq=StringWithSpaces | 'strmatch' strnmatch=STRING | unconditionalmatch ?= 'unconditionalMatch' | 'validateByteRange' validatebyterange=ByteRangeList | 'validateDTD' validatedtd=PathNameValue | 'validateHash' validatehash=RegExp | 'validateSchema' validateschema=PathNameValue | validateurlencoding ?= 'validateUrlEncoding' | validateutf8encoding ?= 'validateUtf8Encoding' | 'verifyCC' verifycc=RegExp | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=RegExp | 'within' within=MacroVar);
+    ('beginsWith' beginswith=PathOrMacro | 'contains' contains=PathOrMacro | 'containsWord' containsWord=STRING | detectsqli ?= 'detectSQLi' | detectxss ?= 'detectXSS' | 'endsWith' endswith=PathOrMacro | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=INT | 'ge' ge=Macro | geolookup ?= 'geoLookup'  | 'gsbLookup' gsblookup=INT | 'gt' gt=Macro | 'inspectFile' inspectfile=URI | 'ipMatch' ipmatch+=IPCIDR[','] |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=Macro | nomatch ?= 'noMatch' | 'pmf' pmf=PathNameValue | 'pmFromFile' pmfromfile=PathNameValue | 'pm' pm=PatternMatch | 'rbl' rbl=Hostname | 'rsub' rsub=AnythingBetweenSlashes | 'rx' rx=RegExp | 'streq' streq=StringWithSpaces | 'strmatch' strnmatch=STRING | unconditionalmatch ?= 'unconditionalMatch' | 'validateByteRange' validatebyterange=ByteRangeList | 'validateDTD' validatedtd=PathNameValue | 'validateHash' validatehash=RegExp | 'validateSchema' validateschema=PathNameValue | validateurlencoding ?= 'validateUrlEncoding' | validateutf8encoding ?= 'validateUtf8Encoding' | 'verifyCC' verifycc=RegExp | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=RegExp | 'within' within=MacroVar);
 
 /* Actions are separated by ',\' or ',' only */
 //ActionList: actionlist+=;
@@ -72,7 +73,7 @@ Incomplete functionality for:
 - sanitiseMatchedBytes (is boolean or a list of char position begin/end to sanitise
 */    
 Action:
-    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' "'"? varname=VariableName '=' Macro "'"? | 'id:' "'"? id=INT "'"? | 'initcol:' initcol=ID | "logdata:" logdata=StringWithMacros | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=MessageValue | multimatch ?= 'multiMatch'  | noauditlog ?= 'noauditlog' | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' "'"? prepend=STRING "'"? | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:'" rev=INT "'" | 'sanitiseArg:' sanitizearg=ParameterName | sanitizematched ?= 'sanitiseMatched' | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? '!'? varname=VariableName '='? macro=Macro? "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=Tag "'" | "ver:'" ver=Tag "'" | 'xmlns:' xmlns=STRING;
+    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' "'"? varname=VariableName '=' Macro "'"? | 'id:' "'"? id=INT "'"? | 'initcol:' colname=StandardColName '=' colvalue=Macro | "logdata:" logdata=StringWithMacros | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=MessageValue | multimatch ?= 'multiMatch'  | noauditlog ?= 'noauditlog' | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' "'"? prepend=STRING "'"? | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:'" rev=INT "'" | 'sanitiseArg:' sanitizearg=ParameterName | sanitizematched ?= 'sanitiseMatched' | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? '!'? varname=VariableName '='? macro=Macro? "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=Tag "'" | "ver:'" ver=Tag "'" | 'xmlns:' xmlns=STRING;
 
 DisruptiveAction: 'block' | 'accept' | 'deny' | 'drop' | 'pass' | 'pause';
     
@@ -120,7 +121,8 @@ PathNameValue: /[a-z0-9\-_\.\/]+/;
 // Macros, e.g: %{tx.critical_anomaly_score}
 Macro:  INT | OperationMacro | ExtendedMacro | MacroVar;
 
-ExtendedMacro: /[A-Za-z0-9S\_\.\:\ \/\%\{\}]+/;
+// This extended macro are a little bag of holding...
+ExtendedMacro: /[A-Za-z0-9S\-\_\.\:\ \/\%\{\}\|\+]+/;
     
 OperationMacro: ('+' | '-') var=MacroVar;
 
@@ -134,7 +136,7 @@ MessageValue: "'" /((\\')|[^\'])*/ "'";
 
 /* There are two kinds of regexp
 For variables, use SlashedRegExp (these don't have ")
-For operations, use RegExp as these have "
+For operations, use RegExp as these have \"
 */
 RegExp: /((\\")|[^"])*/;
     
@@ -150,6 +152,8 @@ URI: /\/[a-zA-Z0-9-_\.\/]+/;
 Hostname: /[a-z][a-zA-Z0-9-_\.\/]+/;
 
 ParameterName: /[a-zA-Z0-9\-\-]+/;
+
+StandardColName: 'global' | 'ip';
 
 /* Enumerated values */
 OnOffValue: 'On' | 'Off';
