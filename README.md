@@ -55,3 +55,5 @@ textx visualize modsec.tx
 dot -Tpng -O modsec.tx.dot
 ```
 Then review the generated PNG `modsec.tx.dot.png`!
+
+Please file an [issue](https://github.com/fzipi/secrules-parser/issues) if you find a bug or you want some feature added.
