@@ -78,7 +78,7 @@ Incomplete functionality for:
 - sanitiseMatchedBytes (is boolean or a list of char position begin/end to sanitise
 */    
 Action:
-    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' "'"? varname=VariableName '=' Macro "'"? | 'id:' "'"? id=INT "'"? | 'initcol:' colname=StandardColName '=' colvalue=Macro | "logdata:" logdata=StringWithMacros | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=MessageValue | multimatch ?= 'multiMatch'  | noauditlog ?= 'noauditlog' | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' "'"? prepend=STRING "'"? | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:'" rev=INT "'" | 'sanitiseArg:' sanitizearg=ParameterName | sanitizematched ?= 'sanitiseMatched' | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? '!'? varname=VariableName '='? macro=Macro? "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=Tag "'" | "ver:'" ver=Tag "'" | 'xmlns:' xmlns=STRING;
+    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' "'"? varname=VariableName '=' Macro "'"? | 'id:' "'"? id=INT "'"? | 'initcol:' colname=StandardColName '=' colvalue=Macro | "logdata:" logdata=StringWithMacros | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=MessageValue | multimatch ?= 'multiMatch'  | noauditlog ?= 'noauditlog' | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' "'"? prepend=STRING "'"? | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:" "'"? rev=INT "'"? | 'sanitiseArg:' sanitizearg=ParameterName | sanitizematched ?= 'sanitiseMatched' | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? '!'? varname=VariableName '='? macro=Macro? "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=Tag "'" | "ver:'" ver=Tag "'" | 'xmlns:' xmlns=STRING;
 
 DisruptiveAction: 'block' | 'accept' | 'deny' | 'drop' | 'pass' | 'pause';
     
@@ -127,7 +127,7 @@ PathNameValue: /[a-z0-9\-_\.\/]+/;
 Macro:  INT | OperationMacro | ExtendedMacro | MacroVar;
 
 // This extended macro are a little bag of holding...
-ExtendedMacro: /[A-Za-z0-9S\-\_\.\:\ \/\%\{\}\|\+]+/;
+ExtendedMacro: /[A-Za-z0-9S\-\_\.\:\ \/\%\{\}\|\+=]+/;
     
 OperationMacro: ('+' | '-') var=MacroVar;
 
@@ -145,7 +145,7 @@ For operations, use RegExp as these have \"
 */
 RegExp: /((\\")|[^"])*/;
     
-SlashedRegExp: /\*/;
+SlashedRegExp: /[^\/]+/;
 /*
 A rules ID Range: 920000-920010
 */    
