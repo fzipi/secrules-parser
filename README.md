@@ -50,8 +50,8 @@ How to use it:
     ```
 
 To visualize the syntax tree, use:
-    ```
-    textx visualize modsec.tx
-    dot -Tpng -O modsec.tx.dot
-    ```
+```
+textx visualize modsec.tx
+dot -Tpng -O modsec.tx.dot
+```
 Then review the generated PNG `modsec.tx.dot.png`!
