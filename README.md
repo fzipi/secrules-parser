@@ -19,13 +19,39 @@ How to use it:
     ```
     pip install --user -r requirements.txt
     ```
-1. Execute `./modsec.py` and it will scan the `*.conf` files in 'owasp-modsecurity-crs/rules'
+1. Execute `./modsec.py` and it will scan the `*.conf` files in 'owasp-modsecurity-crs/rules':
+   ```
+    $ ./modsec.py
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-901-INITIALIZATION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-903.9001-DRUPAL-EXCLUSION-RULES.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-903.9002-WORDPRESS-EXCLUSION-RULES.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-905-COMMON-EXCEPTIONS.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-910-IP-REPUTATION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-911-METHOD-ENFORCEMENT.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-912-DOS-PROTECTION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-913-SCANNER-DETECTION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-920-PROTOCOL-ENFORCEMENT.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-921-PROTOCOL-ATTACK.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-930-APPLICATION-ATTACK-LFI.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-931-APPLICATION-ATTACK-RFI.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-932-APPLICATION-ATTACK-RCE.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-933-APPLICATION-ATTACK-PHP.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-941-APPLICATION-ATTACK-XSS.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-942-APPLICATION-ATTACK-SQLI.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/REQUEST-949-BLOCKING-EVALUATION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-950-DATA-LEAKAGES.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-951-DATA-LEAKAGES-SQL.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-952-DATA-LEAKAGES-JAVA.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-953-DATA-LEAKAGES-PHP.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-954-DATA-LEAKAGES-IIS.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-959-BLOCKING-EVALUATION.conf
+    Syntax OK: owasp-modsecurity-crs/rules/RESPONSE-980-CORRELATION.conf
+    ```
 
-    For visualizing the syntax tree, use:
+To visualize the syntax tree, use:
     ```
     textx visualize modsec.tx
     dot -Tpng -O modsec.tx.dot
     ```
-    Then watch the generated PNG `modsec.tx.dot.png`!
-
-Execution stops because some of the rules aren't fully cleaned and/or there are differences in files.
+Then review the generated PNG `modsec.tx.dot.png`!
