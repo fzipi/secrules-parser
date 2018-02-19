@@ -163,7 +163,7 @@ ParameterName: /[a-zA-Z0-9\-\-]+/;
 StandardColName: 'global' | 'ip';
 
 /* Enumerated values */
-OnOffValue: 'On' | 'Off';
+OnOffValue: 'On' | 'Off' | 'on' | 'off';
 
 AuditEngineValue: OnOffValue | 'RelevantOnly';
 
