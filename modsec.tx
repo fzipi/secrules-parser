@@ -65,7 +65,7 @@ Count: '&';
 
 //- pattern match (pm/pmf)    
 Operator:
-    ('beginsWith' beginswith=PathOrMacro | 'contains' contains=PathOrMacro | 'containsWord' containsWord=STRING | detectsqli ?= 'detectSQLi' | detectxss ?= 'detectXSS' | 'endsWith' endswith=PathOrMacro | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=INT | 'ge' ge=Macro | geolookup ?= 'geoLookup'  | 'gsbLookup' gsblookup=INT | 'gt' gt=Macro | 'inspectFile' inspectfile=URI | 'ipMatch' ipmatch+=IPCIDR[','] |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=Macro | nomatch ?= 'noMatch' | 'pmf' pmf=PathNameValue | 'pmFromFile' pmfromfile=PathNameValue | 'pm' pm=PatternMatch | 'rbl' rbl=Hostname | 'rsub' rsub=AnythingBetweenSlashes | 'rx' rx=RegExp | 'streq' streq=StringWithSpaces | 'strmatch' strnmatch=STRING | unconditionalmatch ?= 'unconditionalMatch' | 'validateByteRange' validatebyterange=ByteRangeList | 'validateDTD' validatedtd=PathNameValue | 'validateHash' validatehash=RegExp | 'validateSchema' validateschema=PathNameValue | validateurlencoding ?= 'validateUrlEncoding' | validateutf8encoding ?= 'validateUtf8Encoding' | 'verifyCC' verifycc=RegExp | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=RegExp | 'within' within=MacroVar);
+    ('beginsWith' beginswith=PathOrMacro | 'contains' contains=PathOrMacro | 'containsWord' containsWord=STRING | detectsqli ?= 'detectSQLi' | detectxss ?= 'detectXSS' | 'endsWith' endswith=PathOrMacro | 'fuzzyHash' fuzzyhash=STRING | 'eq' eq=INT | 'ge' ge=Macro | geolookup ?= 'geoLookup'  | 'gsbLookup' gsblookup=INT | 'gt' gt=Macro | 'inspectFile' inspectfile=URI | 'ipMatch' ipmatch+=IPCIDR[','] |'ipMatchF' ipmatchf=STRING | 'ipMatchFromFile' ipmatchfromfile=STRING | 'le' le=INT | 'lt' lt=Macro | nomatch ?= 'noMatch' | 'pmf' pmf=PathNameValue | 'pmFromFile' pmfromfile=PathNameValue | 'pm' pm=PatternMatch | 'rbl' rbl=Hostname | 'rsub' rsub=AnythingBetweenSlashes | 'rx' rx=RegExp | 'streq' streq=StringWithSpaces | 'strmatch' strnmatch=STRING | unconditionalmatch ?= 'unconditionalMatch' | 'validateByteRange' validatebyterange=ByteRangeList | 'validateDTD' validatedtd=PathNameValue | 'validateHash' validatehash=RegExp | 'validateSchema' validateschema=PathNameValue | validateurlencoding ?= 'validateUrlEncoding' | validateutf8encoding ?= 'validateUtf8Encoding' | 'verifyCC' verifycc=RegExp | 'verifyCPF' verifycpf=STRING | 'verifySSN' verifyssn=RegExp | 'within' within=MacroVar | '' rx=RegExp);
 
 /* Actions are separated by ',\' or ',' only */
 //ActionList: actionlist+=;
@@ -78,7 +78,7 @@ Incomplete functionality for:
 - sanitiseMatchedBytes (is boolean or a list of char position begin/end to sanitise
 */    
 Action:
-    'accuracy:' accuracy=INT | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' "'"? varname=VariableName '=' Macro "'"? | 'id:' "'"? id=INT "'"? | 'initcol:' colname=StandardColName '=' colvalue=Macro | "logdata:" logdata=StringWithMacros | log ?= 'log' | 'maturity:' maturity=INT | 'msg:' msg=MessageValue | multimatch ?= 'multiMatch'  | noauditlog ?= 'noauditlog' | nolog ?= 'nolog' | 'phase:' phase=INT | 'prepend:' "'"? prepend=STRING "'"? | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:" "'"? rev=INT "'"? | 'sanitiseArg:' sanitizearg=ParameterName | sanitizematched ?= 'sanitiseMatched' | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=STRING | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? '!'? varname=VariableName '='? macro=Macro? "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=Tag "'" | "ver:'" ver=Tag "'" | 'xmlns:' xmlns=STRING;
+    'accuracy:' "'"? accuracy=INT "'"? | disruptiveaction=DisruptiveAction | append ?= 'append' | auditlog ?= 'auditlog' | capture ?= 'capture' |  chain ?= 'chain' | 'ctl:' ctl=TransientAction | 'deprecatevar:' deprecatevar=ID | 'exec:' exec=STRING | 'expirevar:' "'"? varname=VariableName '=' Macro "'"? | 'id:' "'"? id=INT "'"? | 'initcol:' colname=StandardColName '=' colvalue=Macro | "logdata:" logdata=StringWithMacros | log ?= 'log' | 'maturity:' "'"? maturity=INT "'"? | 'msg:' msg=MessageValue | multimatch ?= 'multiMatch'  | noauditlog ?= 'noauditlog' | nolog ?= 'nolog' | 'phase:' phase=Phase | 'prepend:' "'"? prepend=STRING "'"? | 'proxy:' proxy=STRING | 'redirect:' redirect=STRING | "rev:" "'"? rev=INT "'"? | 'sanitiseArg:' sanitizearg=ParameterName | sanitizematched ?= 'sanitiseMatched' | 'sanitiseMatchedBytes:' sanitizematchedbytes=INT | 'sanitiseRequestHeader:' sanitizerequestheader=STRING | 'sanitiseResponseHeader:' sanitizeresponseheader=STRING | 'severity:' severity=Severity | 'setuid:' setuid=STRING | 'setrsc:' setrsc=STRING | 'setsid:' setsid=STRING | 'setenv:' setenv=STRING | 'setvar:' "'"? '!'? varname=VariableName '='? macro=Macro? "'"? | 'skip:' skip=INT | 'skipAfter:' skipafter=SkipTag | 'status:' status=INT | 't:' transformations*=Transformation[','] | "tag:'" tag=Tag "'" | "ver:'" ver=Tag "'" | 'xmlns:' xmlns=STRING;
 
 DisruptiveAction: 'block' | 'accept' | 'deny' | 'drop' | 'pass' | 'pause';
     
@@ -94,9 +94,11 @@ Comment[ws='\t ']:
     /\\\n|^\#.*$/;
 
 /* Tags for jumping from rules e.g: END-DRUPAL-RULE-EXCLUSIONS */    
-SkipTag: /[A-Z0-9-]+/;
+SkipTag: /[A-Z0-9-_]+/;
 
 VariableName: 'tx.' MacroVar '-'? Tag? '-'? MacroVar? | /[A-Za-z0-9_\-\.\/\[\]]+/;
+
+Phase: /[0-5]/ | 'request' | 'response' | 'logging';
 
 //Aho-Corasick
 PatternMatch: /((\\")|[^"])*/;
@@ -161,7 +163,7 @@ ParameterName: /[a-zA-Z0-9\-\-]+/;
 StandardColName: 'global' | 'ip';
 
 /* Enumerated values */
-OnOffValue: 'On' | 'Off';
+OnOffValue: 'On' | 'Off' | 'on' | 'off';
 
 AuditEngineValue: OnOffValue | 'RelevantOnly';
 
@@ -171,3 +173,5 @@ RuleEngineValue: OnOffValue | 'DetectionOnly';
 AuditLogPartsValue: /(\+|-)[A-Z]/;
 
 RequestBodyProcessorValue: 'text/xml' | 'text/json';
+
+Severity: "'"? ('ALERT' | 'CRITICAL' | 'EMERGENCY' | 'ERROR' | 'NOTICE' | 'WARNING') "'"?;
