@@ -12,6 +12,7 @@ version 3, or (at your option), any later version.
 
 """
 
+from __future__ import print_function
 import os
 import glob
 import pprint
@@ -38,7 +39,7 @@ def secrule_id_processor(rule):
 def debug_rule(rule):
     """ Don't use this unless you want to wait and read too much """
     serialized = jsonpickle.encode(rule)
-    print yaml.dump(yaml.load(serialized), indent=2)
+    print(yaml.dump(yaml.load(serialized), indent=2))
 
 def get_rule_id(rule):
     """ Gets rule ID. Only for SecAction or SecRule """
@@ -53,13 +54,13 @@ def print_rule(rule):
     if rule.__class__.__name__ == "SecRule":
         for variable in rule.variables:
             if variable.collection == "TX" and variable.collectionArg == "PARANOIA_LEVEL":
-                print "[One-liner Paranoia level Rule, id {}]".format(get_rule_id(rule))
+                print("[One-liner Paranoia level Rule, id {}]".format(get_rule_id(rule)))
 
         for action in rule.actions:
             if action.id:
-                print "* Rule id = {}".format(action.id)
+                print("* Rule id = {}".format(action.id))
             if action.chain:
-                print "* > This is a chained rule from the above.".format(action.id)
+                print("* > This is a chained rule from the above.".format(action.id))
 
 # Load Meta-Model
 modsec_mm = metamodel_from_file('modsec.tx', memoization=True)
@@ -71,7 +72,7 @@ files = args.files if args.files else 'owasp-modsecurity-crs/rules/*.conf'
 
 for rules in glob.glob(files):
     if args.verbose:
-        print 'Processing file %s:' % rules
+        print('Processing file %s:' % rules)
     try:
         model = modsec_mm.model_from_file(rules)
         if args.verbose:
@@ -81,8 +82,8 @@ for rules in glob.glob(files):
             for rule in model.rules:
                 debug_rule(rule)
         if model.rules:
-            print "Syntax OK: {}".format(rules)
+            print("Syntax OK: {}".format(rules))
     except TextXSyntaxError as e:
-        print "Syntax error in line {}, col {}: {}".format(e.line, e.col, e.message)
+        print("Syntax error in line {}, col {}: {}".format(e.line, e.col, e.message))
 
 
