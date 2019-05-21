@@ -1,0 +1,12 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+jsonpickle = ">=0.8.0"
+textX = ">=1.5.0"
+PyYAML = ">=3.12"
+

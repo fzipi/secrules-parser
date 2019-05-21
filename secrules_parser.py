@@ -17,7 +17,13 @@ from textx.metamodel import metamodel_from_file
 from textx.exceptions import TextXSyntaxError
 import json
 import pkg_resources
-
+from inspect import getmembers
+from pprint import pprint
+from classes.operator import Operator, OperatorType
+from classes.action import Action, ActionType
+from classes.variable import Variable
+from classes.collection import Collection
+from classes.secrule import SecRule
 
 def parse_args():
     """ Parse our command line arguments """
@@ -39,9 +45,13 @@ def process_rules(files, verbose=False):
     resource_package = __name__
     resource_path = '/'.join(['secrules.tx'])
     template = pkg_resources.resource_filename(resource_package, resource_path)
-    modsec_mm = metamodel_from_file(template, memoization=True)
+    modsec_mm = metamodel_from_file(template, memoization=True, classes=[SecRule,Operator,OperatorType,Variable,Action,ActionType,Collection])
     # Register test processor
-    modsec_mm.register_obj_processors({'SecRule': secrule_id_processor})
+    modsec_mm.register_obj_processors(
+        {'SecRule': secrule_id_processor
+         }
+    )
+
     # Make sure we don't have an empty list of files
     if files == []:
         return models
@@ -55,10 +65,11 @@ def process_rules(files, verbose=False):
         models.append(model)
     return models
 
-
 def secrule_id_processor(rule):
     """ Processor for each rule, if needed """
-    pass
+    #print(rule)
+    #print("Now, ordered:")
+    rule.print_ordered()
 
 
 def call_activites(args, models):
