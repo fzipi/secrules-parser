@@ -8,11 +8,21 @@ class Action(object):
 
     def __repr__(self):
         value = ""
+        indent = self.parent.actions_indent()
         if self.value is not None:
             value = self.value
-        repr = "{indent}{name}{value}".format(name=self.name, value=value, indent="")
+        # Don't indent if the action is the first one
+        if self.is_first_action():
+            indent = ""
+        repr = "{indent}{name}{value}".format(name=self.name, value=value, indent=indent)
 
         return repr
+
+    def is_first_action(self):
+        first = False
+        if self.name == "id" or (self.name == "capture" and self.parent.id is None):
+            first = True
+        return first
 
 
 class ActionType(object):

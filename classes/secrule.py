@@ -14,6 +14,7 @@ class SecRule(object):
         self.actions = actions
         self.id = None
         self.chained = False
+        self.capture = False
         self.chain = []
 
         for action in self.actions:
@@ -21,6 +22,8 @@ class SecRule(object):
                 self.chained = True
             if action.name == 'id':
                 self.id = action.value
+            if action.name == 'capture':
+                self.capture = True
 
         if self.__class__.__name__ == "SecRule":
             if self.id is None:
@@ -36,11 +39,20 @@ class SecRule(object):
 
     def __repr__(self):
         if self.chained and self.id is None:
-            repr = "{indent}This SecRule is the {number} chained from {id}".format(indent="\t",number=len(self.chain), id=self.get_parent_id())
+            repr = "{indent}This SecRule is the {number} chained from {id}".format(indent=self.indent(),number=self.indentation_level(), id=self.get_parent_id())
         else:
             repr = "This is SecRule {id}".format(id=self.get_id())
 
         return repr
+
+    def indentation_level(self):
+        return len(self.chain)
+
+    def indent(self):
+        return '    ' * self.indentation_level()
+
+    def actions_indent(self):
+        return self.indent() + '    '
 
     def get_id(self):
         """
@@ -101,11 +113,14 @@ class SecRule(object):
                 negated = "!"
             variables = '|'.join(map(repr,self.variables))
             actions = ',\\\n'.join(map(repr, self.actions))
-            output = 'SecRule "{variables}" "{negated}{operator}" \\\n    "{actions}"'.format(
-                variables=variables,
-                negated=negated,
-                operator=self.operator,
-                actions=actions
+            output = '{indent}SecRule "{variables}" "{negated}{operator}" \\\n{actions_indent}"{actions}"{newline}'.format(
+                    variables=variables,
+                    negated=negated,
+                    operator=self.operator,
+                    actions=actions,
+                    indent=self.indent(),
+                    actions_indent=self.actions_indent(),
+                    newline="" if self.chained else "\n",
             )
             print(output)
         else:
